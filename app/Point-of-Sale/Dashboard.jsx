@@ -7,7 +7,7 @@ import SalesReport from "./SalesReport";
 import CancelTransactionModal from "../Features/CancelTransaction";
 import PendingTransaction from "../Features/PendingTransaction"; // Example path adjustment
 import MoveToPendingTransactions from "../Features/MoveToPendingTransaction"; // Import the new component
-import { useSalesData } from "../Point-of-Sale/useSalesData"; // Adjust the path as needed
+import { useSalesData } from "../Point-of-Sale/useSalesData"; 
 
 const POS = ({ user, setUser }) => {
   const [items, setItems] = useState([]);
@@ -63,7 +63,7 @@ const POS = ({ user, setUser }) => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost/API/index.php");
+        const response = await axios.get("http://localhost/pos/products.php");
         const data = response.data;
         setProducts(
           Object.entries(data.products).map(([barcode, { name, price }]) => ({

@@ -1,39 +1,27 @@
 "use client";
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
+
+import AdminDashboard from "./Admin/admin"; // Adjust the path as needed
 import POS from "./Point-of-Sale/Dashboard";
 
-const App = () => {
+function App() {
   const [user, setUser] = useState(null);
 
-  const handleLogin = (user) => {
-    setUser(user);
+  const handleLogin = (loggedInUser) => {
+    setUser(loggedInUser);
   };
 
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            user ? <Navigate to="/pos" /> : <Login onLogin={handleLogin} />
-          }
-        />
-        <Route
-          path="/pos"
-          element={
-            user ? <POS user={user} setUser={setUser} /> : <Navigate to="/" />
-          }
-        />
+        <Route path="/" element={<Login onLogin={handleLogin} />} />
+        <Route path="/admin" element={<AdminDashboard user={user} />} />
+        <Route path="/pos" element={<POS user={user} />} />
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;
